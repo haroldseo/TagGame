@@ -33,22 +33,20 @@ body {
   position: relative;
 }
 
-.red {
-  background-color: red;
+.circle {
   width: 30px;
   height: 30px;
   border-radius: 50%;
   position: absolute;
-  left: 3rem;
   top: 15rem;
+}
+
+.red {
+  background-color: red;
+  left: 3rem;
 }
 
 .blue {
   background-color: blue;
-  width: 30px;
-  height: 30px;
-  border-radius: 50%;
-  position: absolute;
   right: 3rem;
-  top: 15rem;
 }
