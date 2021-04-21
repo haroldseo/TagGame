@@ -5,7 +5,7 @@
 
 body {
   text-align: center;
-  font-family: "Press Start 2P", cursive;
+  font-family: "Press Start 2P";
 }
 
 .header {
@@ -25,8 +25,7 @@ body {
   margin: 0 2rem;
 }
 
-.column h4 {
-  /* text-decoration: underline; */
+.column div {
   margin-bottom: 1rem;
 }
 
@@ -38,7 +37,15 @@ body {
   position: relative;
 }
 
-.circle {
+.instructions {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -ms-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+}
+
+.player {
   width: 30px;
   height: 30px;
   border-radius: 50%;
@@ -54,9 +61,4 @@ body {
 .blue {
   background-color: blue;
   right: 3rem;
-}
-
-.timer {
-  font-family: "Press Start 2P", cursive;
-  padding: 1rem;
 }
