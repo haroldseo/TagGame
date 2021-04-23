@@ -4,6 +4,10 @@ let red = $(".red"),
   verticalMax = $(".field").height() - $(".player").height(),
   keys = [],
   x = 3,
+  time = null,
+  redMovement = null,
+  blueMovement = null,
+  currentPlayer = 1,
   started = false;
 
 function horizontal(v, a, b) {
@@ -16,6 +20,10 @@ function vertical(v, a, b) {
   return newv < 0 ? 0 : newv > verticalMax ? verticalMax : newv;
 }
 
+function distance(a, b) {
+  return Math.sqrt(Math.pow(b[0].offsetLeft - a[0].offsetLeft, 2) + Math.pow(b[0].offsetTop - a[0].offsetTop, 2));
+}
+
 $(window).keydown(function (evt) {
   keys[evt.which] = true;
 });
@@ -23,8 +31,9 @@ $(window).keyup(function (evt) {
   keys[evt.which] = false;
 });
 
+//Player Movement
 function movement() {
-  setInterval(function () {
+  redMovement = setInterval(function () {
     red.css({
       left: function (i, v) {
         return horizontal(v, 65, 68);
@@ -33,9 +42,21 @@ function movement() {
         return vertical(v, 87, 83);
       },
     });
+
+    //Collision Detection
+    if (currentPlayer === 1) {
+      let d = distance(red, blue);
+      if (d <= 30) {
+        clearInterval(redMovement);
+        clearInterval(blueMovement);
+        clearInterval(time);
+        $(".redScore").text(seconds);
+        switchSides();
+      }
+    }
   }, 10);
 
-  setInterval(function () {
+  blueMovement = setInterval(function () {
     blue.css({
       left: function (i, v) {
         return horizontal(v, 37, 39);
@@ -59,10 +80,10 @@ function addTime() {
 //Countdown
 let timeleft = 3;
 function countdown() {
-  setInterval(function () {
+  countdown = setInterval(function () {
     if (timeleft <= 0) {
-      clearInterval(countdown);
       $(".instructions").text("Go!!").fadeOut(800);
+      clearInterval(countdown);
     } else {
       $(".instructions").text(timeleft);
     }
@@ -76,9 +97,10 @@ $(document).keypress(function (evt) {
     $(".instructions").text("Red is IT!!");
     countdown();
     setTimeout(function () {
-      setInterval(addTime, 1000);
+      time = setInterval(addTime, 1000);
       movement();
-    }, 3000);
+      clearInterval(countdown);
+    }, 4000);
     started = true;
   }
 });
