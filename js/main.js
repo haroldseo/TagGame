@@ -1,7 +1,7 @@
 let red = $(".red"),
   blue = $(".blue"),
-  horizontalMax = $(".field").width() - $(".player").width(),
-  verticalMax = $(".field").height() - $(".player").height(),
+  horizontalMax = $(".field").width() - $(".player").width() + 15,
+  verticalMax = $(".field").height() - $(".player").height() + 15,
   keys = [],
   x = 3,
   time = null,
@@ -12,12 +12,12 @@ let red = $(".red"),
 
 function horizontal(v, a, b) {
   let newh = parseInt(v, 10) - (keys[a] ? x : 0) + (keys[b] ? x : 0);
-  return newh < 0 ? 0 : newh > horizontalMax ? horizontalMax : newh;
+  return newh < 15 ? 15 : newh > horizontalMax ? horizontalMax : newh;
 }
 
 function vertical(v, a, b) {
   let newv = parseInt(v, 10) - (keys[a] ? x : 0) + (keys[b] ? x : 0);
-  return newv < 0 ? 0 : newv > verticalMax ? verticalMax : newv;
+  return newv < 15 ? 15 : newv > verticalMax ? verticalMax : newv;
 }
 
 function distance(a, b) {
@@ -68,6 +68,22 @@ function movement() {
   }, 10);
 }
 
+//Switch
+function switchSides() {
+  $(".instructions").text("TAG!!").fadeIn(800);
+  setTimeout(function () {
+    $(".instructions").text("Blue is IT!!");
+    red.css({
+      left: 10 + "%",
+      top: 50 + "%",
+    });
+    blue.css({
+      left: 90 + "%",
+      top: 50 + "%",
+    });
+  }, 1000);
+}
+
 //Timer
 let timer = $(".timer"),
   seconds = 0;
@@ -99,7 +115,6 @@ $(document).keypress(function (evt) {
     setTimeout(function () {
       time = setInterval(addTime, 1000);
       movement();
-      clearInterval(countdown);
     }, 4000);
     started = true;
   }

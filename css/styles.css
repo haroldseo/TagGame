@@ -50,15 +50,19 @@ body {
   height: 30px;
   border-radius: 50%;
   position: absolute;
-  top: 15rem;
+  top: 50%;
 }
 
 .red {
   background-color: red;
-  left: 3rem;
+  left: 10%;
+  -ms-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
 }
 
 .blue {
   background-color: blue;
-  right: 3rem;
+  left: 90%;
+  -ms-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
 }
