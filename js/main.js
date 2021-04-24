@@ -65,12 +65,39 @@ function movement() {
         return vertical(v, 38, 40);
       },
     });
+
+    //Collision Detection
+    if (currentPlayer === 2) {
+      let d = distance(red, blue);
+      if (d <= 30) {
+        clearInterval(redMovement);
+        clearInterval(blueMovement);
+        clearInterval(time);
+        $(".blueScore").text(seconds);
+        $(".instructions").text("TAG!!").fadeIn(800);
+        winner = setInterval(function () {
+          if ($(".blueScore").text() < $(".redScore").text()) {
+            $(".instructions").text("BLUE WINS!!");
+            clearInterval(winner);
+          } else if ($(".blueScore").text() > $(".redScore").text()) {
+            $(".instructions").text("RED WINS!!");
+            clearInterval(winner);
+          } else {
+            $(".instructions").text("ITS A TIE!!");
+            clearInterval(winner);
+          }
+        }, 2000);
+      }
+    }
   }, 10);
 }
 
 //Switch
 function switchSides() {
   $(".instructions").text("TAG!!").fadeIn(800);
+  if (currentPlayer === 1) {
+    currentPlayer = 2;
+  }
   setTimeout(function () {
     $(".instructions").text("Blue is IT!!");
     red.css({
@@ -81,7 +108,15 @@ function switchSides() {
       left: 90 + "%",
       top: 50 + "%",
     });
-  }, 1000);
+    timeleft = 3;
+    countdownTimer();
+    seconds = 0;
+    timer[0].innerText = 0;
+    setTimeout(function () {
+      time = setInterval(addTime, 1000);
+      movement();
+    }, 4000);
+  }, 2000);
 }
 
 //Timer
@@ -95,7 +130,7 @@ function addTime() {
 
 //Countdown
 let timeleft = 3;
-function countdown() {
+function countdownTimer() {
   countdown = setInterval(function () {
     if (timeleft <= 0) {
       $(".instructions").text("Go!!").fadeOut(800);
@@ -111,7 +146,7 @@ function countdown() {
 $(document).keypress(function (evt) {
   if (evt.which === 32 && !started) {
     $(".instructions").text("Red is IT!!");
-    countdown();
+    countdownTimer();
     setTimeout(function () {
       time = setInterval(addTime, 1000);
       movement();
