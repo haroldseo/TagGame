@@ -87,6 +87,27 @@ function movement() {
             clearInterval(winner);
           }
         }, 2000);
+        reset = setInterval(function () {
+          $(".instructions").text("Press Space to Start");
+          if (currentPlayer === 2) {
+            currentPlayer = 1;
+          }
+          red.css({
+            left: 10 + "%",
+            top: 50 + "%",
+          });
+          blue.css({
+            left: 90 + "%",
+            top: 50 + "%",
+          });
+          seconds = 0;
+          timer[0].innerText = 0;
+          timeleft = 3;
+          $(".blueScore").text(0);
+          $(".redScore").text(0);
+          started = false;
+          clearInterval(reset);
+        }, 5000);
       }
     }
   }, 10);
