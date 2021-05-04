@@ -5,11 +5,12 @@
 
 body {
   text-align: center;
-  font-family: "Press Start 2P";
+  font-family: "Goldman";
+  font-size: 1.5rem;
 }
 
 .header {
-  margin: 2rem;
+  margin: 1.25rem;
 }
 
 .container {
@@ -25,8 +26,8 @@ body {
   margin: 0 2rem;
 }
 
-.column div {
-  margin-bottom: 1rem;
+.scoreboard {
+  margin: 0 0 1rem 0;
 }
 
 .field {
