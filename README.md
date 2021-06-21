@@ -1,7 +1,7 @@
 # TagGame
 ### 2-Player, Head to Head Game
 ## Objective
-- Players will take turns being "it", the "it" player has to chase down the other player as quickly as possible, the player with the faster time wins. 
+- Players will take turn being "it", the "it" player has to chase down the other player as quickly as possible, the player with the faster time wins. 
 - Player Red will use the WASD keys to move
 - Player Blue will use the arrow keys to move
 
